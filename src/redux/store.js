@@ -1,3 +1,5 @@
+// store.js
+
 import {
   persistStore,
   persistReducer,
