@@ -1,29 +1,43 @@
-import React from 'react';
-import { ContactListItem } from 'components/ContactListItem/ContactListItem';
-import PropTypes from 'prop-types';
-import css from './ContactList.module.css';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+// prettier-ignore
+import { selectFilteredContacts, selectError, selectIsLoading } from '../../redux/contacts/contactsSelector';
+import { fetchContacts } from '../../redux/contacts/contactsOperation';
+import { ContactListItem } from './ContactListItem/ContactListItem';
+import { Loader } from 'components/Loader/Loader';
 
-export const ContactList = ({ contacts, deleteContact }) => {
+export const ContactList = () => {
+  const filteredContacts = useSelector(selectFilteredContacts);
+  const error = useSelector(selectError);
+  const isLoading = useSelector(selectIsLoading);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
-    <ul className={css.ulBox}>
-      {contacts.map(contact => (
-        <ContactListItem
-          key={contact.id}
-          filteredContact={contact}
-          deleteContact={deleteContact}
-        />
-      ))}
+    <ul>
+      {/* if loading and not error, show Loader */}
+      {isLoading && !error && <Loader />}
+
+      {/* if not loading, not error and filtered contacts is empty, show warning */}
+      {!isLoading && !error && filteredContacts.length === 0 && (
+        <p>The Phonebook is empty. Please add a contact</p>
+      )}
+
+      {/* if not loading, not error and have atleast 1 filtered contact, show ContactListItem */}
+      {!isLoading &&
+        !error &&
+        filteredContacts.length > 0 &&
+        filteredContacts.map(filteredContact => (
+          <ContactListItem
+            key={filteredContact.id}
+            filteredContact={filteredContact}
+          />
+        ))}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  deleteContact: PropTypes.func.isRequired,
 };
