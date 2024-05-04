@@ -1,13 +1,23 @@
 .link {
   display: inline-block;
   text-decoration: none;
-  padding: 12px;
+  padding: 12px 20px;
   font-weight: 700;
   color: #2a363b;
+   border-radius: 5px;
+  transition: all 0.3s ease;
+ }
+
+.link:hover,
+.link:active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px #2193b034;
 }
 
 .linkActive {
   composes: link;
   font-weight: 800;
-  color: #e84a5f;
+  color: #2193b0;
+  background-color: #ffffff;
+   border: 2px solid #2193b0;
 }

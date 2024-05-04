@@ -1,12 +1,31 @@
 .container {
-  min-height: calc(100vh - 50px);
+  min-height: calc(50vh - 50px);
+  /* Adjusted for any fixed headers or footers */
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Soft blue background color */
+  color: #333;
+   /* Darker font for contrast */
+
+  /* Padding for spacing on smaller screens */
 }
+
 
 .title {
   font-weight: 500;
-  font-size: 48px;
+  font-size: 28px;
+  /* Large font size for impact */
   text-align: center;
+  color: #275280;
+  /* Theme color for titles */
+  transition: transform 0.3s ease-in-out;
+  /* Smooth transition for hover effect */
+}
+
+.title:hover {
+  transform: scale(1.05);
+  /* Slightly enlarge the title on hover */
+  cursor: pointer;
+  /* Indicate that the title might be interactive */
 }

@@ -4,10 +4,22 @@
   padding: 12px;
   font-weight: 700;
   color: #2a363b;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.link:hover {
+  transform: scale(1.05);
+  color: #3d5a80;
 }
 
 .linkActive {
   composes: link;
-  font-weight: 800;
-  color: #e84a5f;
-}
+
+    /* More bold for active links */
+    color: #2193b0;
+    /* Bright color for active links */
+    background-color: #ffffff;
+    /* White background to highlight active state */
+    border: 2px solid #2193b0;
+    /* Border to emphasize the active link */
+  }
